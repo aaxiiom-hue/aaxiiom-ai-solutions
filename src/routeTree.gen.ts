@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as TellUsYourProblemRouteImport } from './routes/tell-us-your-problem'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
+import { Route as IndustriesIndustrySlugRouteImport } from './routes/industries.$industrySlug'
+import { Route as SolutionsIndexRouteImport } from './routes/solutions.index'
+import { Route as SolutionsCategorySlugRouteImport } from './routes/solutions.$categorySlug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TellUsYourProblemRoute = TellUsYourProblemRouteImport.update({
+  id: '/tell-us-your-problem',
+  path: '/tell-us-your-problem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
+  id: '/industries/',
+  path: '/industries/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesIndustrySlugRoute = IndustriesIndustrySlugRouteImport.update({
+  id: '/industries/$industrySlug',
+  path: '/industries/$industrySlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
+  id: '/solutions/',
+  path: '/solutions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsCategorySlugRoute = SolutionsCategorySlugRouteImport.update({
+  id: '/solutions/$categorySlug',
+  path: '/solutions/$categorySlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/tell-us-your-problem': typeof TellUsYourProblemRoute
+  '/api/chat': typeof ApiChatRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
+  '/solutions/$categorySlug': typeof SolutionsCategorySlugRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/tell-us-your-problem': typeof TellUsYourProblemRoute
+  '/api/chat': typeof ApiChatRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
+  '/solutions/$categorySlug': typeof SolutionsCategorySlugRoute
+  '/industries': typeof IndustriesIndexRoute
+  '/solutions': typeof SolutionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/tell-us-your-problem': typeof TellUsYourProblemRoute
+  '/api/chat': typeof ApiChatRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
+  '/solutions/$categorySlug': typeof SolutionsCategorySlugRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/case-studies'
+    | '/how-it-works'
+    | '/tell-us-your-problem'
+    | '/api/chat'
+    | '/industries/$industrySlug'
+    | '/solutions/$categorySlug'
+    | '/industries/'
+    | '/solutions/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/case-studies'
+    | '/how-it-works'
+    | '/tell-us-your-problem'
+    | '/api/chat'
+    | '/industries/$industrySlug'
+    | '/solutions/$categorySlug'
+    | '/industries'
+    | '/solutions'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/case-studies'
+    | '/how-it-works'
+    | '/tell-us-your-problem'
+    | '/api/chat'
+    | '/industries/$industrySlug'
+    | '/solutions/$categorySlug'
+    | '/industries/'
+    | '/solutions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CaseStudiesRoute: typeof CaseStudiesRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  TellUsYourProblemRoute: typeof TellUsYourProblemRoute
+  ApiChatRoute: typeof ApiChatRoute
+  IndustriesIndustrySlugRoute: typeof IndustriesIndustrySlugRoute
+  SolutionsCategorySlugRoute: typeof SolutionsCategorySlugRoute
+  IndustriesIndexRoute: typeof IndustriesIndexRoute
+  SolutionsIndexRoute: typeof SolutionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tell-us-your-problem': {
+      id: '/tell-us-your-problem'
+      path: '/tell-us-your-problem'
+      fullPath: '/tell-us-your-problem'
+      preLoaderRoute: typeof TellUsYourProblemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/': {
+      id: '/industries/'
+      path: '/industries'
+      fullPath: '/industries/'
+      preLoaderRoute: typeof IndustriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/$industrySlug': {
+      id: '/industries/$industrySlug'
+      path: '/industries/$industrySlug'
+      fullPath: '/industries/$industrySlug'
+      preLoaderRoute: typeof IndustriesIndustrySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/': {
+      id: '/solutions/'
+      path: '/solutions'
+      fullPath: '/solutions/'
+      preLoaderRoute: typeof SolutionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/$categorySlug': {
+      id: '/solutions/$categorySlug'
+      path: '/solutions/$categorySlug'
+      fullPath: '/solutions/$categorySlug'
+      preLoaderRoute: typeof SolutionsCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CaseStudiesRoute: CaseStudiesRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  TellUsYourProblemRoute: TellUsYourProblemRoute,
+  ApiChatRoute: ApiChatRoute,
+  IndustriesIndustrySlugRoute: IndustriesIndustrySlugRoute,
+  SolutionsCategorySlugRoute: SolutionsCategorySlugRoute,
+  IndustriesIndexRoute: IndustriesIndexRoute,
+  SolutionsIndexRoute: SolutionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
