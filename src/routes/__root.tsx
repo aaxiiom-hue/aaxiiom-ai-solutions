@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import { Chatbot } from "@/components/site/Chatbot";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { PageNav } from "@/components/site/PageNav";
+import { ScrollFx } from "@/components/site/ScrollFx";
+
 import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -127,11 +130,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ScrollFx />
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
+          <PageNav />
         </main>
         <Footer />
       </div>
@@ -140,3 +145,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
