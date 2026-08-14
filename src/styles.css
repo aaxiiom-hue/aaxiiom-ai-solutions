@@ -121,7 +121,56 @@
     -webkit-text-size-adjust: 100%;
   }
 
-  body {
+  main {
+    perspective: 1400px;
+    perspective-origin: 50% 0%;
+  }
+
+  .reveal-3d {
+    opacity: 0;
+    transform: translate3d(0, 46px, -90px) rotateX(7deg) scale(0.97);
+    transform-origin: 50% 0%;
+    transition:
+      opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+      filter 0.9s ease var(--reveal-delay, 0ms);
+    filter: blur(6px);
+    will-change: transform, opacity;
+  }
+
+  .reveal-3d.is-revealed {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .reveal-3d .reveal-child {
+    opacity: 0;
+    transform: translate3d(0, 26px, -40px) rotateX(5deg);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--stagger-delay, 0ms),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--stagger-delay, 0ms);
+  }
+
+  .reveal-3d.is-revealed .reveal-child {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .reveal-3d,
+    .reveal-3d .reveal-child {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
+
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
