@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as TellUsYourProblemRouteImport } from './routes/tell-us-your-problem'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
 import { Route as IndustriesIndustrySlugRouteImport } from './routes/industries.$industrySlug'
@@ -37,6 +38,11 @@ const CaseStudiesRoute = CaseStudiesRouteImport.update({
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TellUsYourProblemRoute = TellUsYourProblemRouteImport.update({
+  id: '/tell-us-your-problem',
+  path: '/tell-us-your-problem',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/case-studies': typeof CaseStudiesRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/tell-us-your-problem': typeof TellUsYourProblemRoute
   '/api/chat': typeof ApiChatRoute
   '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
   '/solutions/$categorySlug': typeof SolutionsCategorySlugRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/case-studies': typeof CaseStudiesRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/tell-us-your-problem': typeof TellUsYourProblemRoute
   '/api/chat': typeof ApiChatRoute
   '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
   '/solutions/$categorySlug': typeof SolutionsCategorySlugRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/case-studies': typeof CaseStudiesRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/tell-us-your-problem': typeof TellUsYourProblemRoute
   '/api/chat': typeof ApiChatRoute
   '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
   '/solutions/$categorySlug': typeof SolutionsCategorySlugRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/case-studies'
     | '/how-it-works'
+    | '/tell-us-your-problem'
     | '/api/chat'
     | '/industries/$industrySlug'
     | '/solutions/$categorySlug'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/case-studies'
     | '/how-it-works'
+    | '/tell-us-your-problem'
     | '/api/chat'
     | '/industries/$industrySlug'
     | '/solutions/$categorySlug'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/case-studies'
     | '/how-it-works'
+    | '/tell-us-your-problem'
     | '/api/chat'
     | '/industries/$industrySlug'
     | '/solutions/$categorySlug'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CaseStudiesRoute: typeof CaseStudiesRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  TellUsYourProblemRoute: typeof TellUsYourProblemRoute
   ApiChatRoute: typeof ApiChatRoute
   IndustriesIndustrySlugRoute: typeof IndustriesIndustrySlugRoute
   SolutionsCategorySlugRoute: typeof SolutionsCategorySlugRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tell-us-your-problem': {
+      id: '/tell-us-your-problem'
+      path: '/tell-us-your-problem'
+      fullPath: '/tell-us-your-problem'
+      preLoaderRoute: typeof TellUsYourProblemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CaseStudiesRoute: CaseStudiesRoute,
   HowItWorksRoute: HowItWorksRoute,
+  TellUsYourProblemRoute: TellUsYourProblemRoute,
   ApiChatRoute: ApiChatRoute,
   IndustriesIndustrySlugRoute: IndustriesIndustrySlugRoute,
   SolutionsCategorySlugRoute: SolutionsCategorySlugRoute,
