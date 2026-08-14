@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import { Chatbot } from "@/components/site/Chatbot";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { PageNav } from "@/components/site/PageNav";
+import { ScrollFx } from "@/components/site/ScrollFx";
+
 import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
