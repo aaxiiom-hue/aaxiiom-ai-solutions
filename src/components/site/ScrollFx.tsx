@@ -11,6 +11,14 @@ export function ScrollFx() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
+    let frame = 0;
+    let cleanup: (() => void) | undefined;
+    // Wait until after hydration so we never mutate DOM React is still matching.
+    frame = window.requestAnimationFrame(() => {
+      cleanup = setup();
+    });
+
+    function setup() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const bar = document.getElementById("scroll-progress-bar");
 
@@ -64,6 +72,12 @@ export function ScrollFx() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       observer?.disconnect();
+    };
+    }
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      cleanup?.();
     };
   }, [pathname]);
 
