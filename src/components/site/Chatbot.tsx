@@ -14,8 +14,8 @@ interface ChatLink {
 interface Message {
   role: "user" | "assistant";
   content: string;
-  links?: ChatLink[];
-  fallback?: boolean;
+  links?: ChatLink[] | undefined;
+  fallback?: boolean | undefined;
 }
 
 const openers = [
