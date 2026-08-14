@@ -11,12 +11,11 @@ export function ScrollFx() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-    let frame = 0;
     let cleanup: (() => void) | undefined;
-    // Wait until after hydration so we never mutate DOM React is still matching.
-    frame = window.requestAnimationFrame(() => {
+    // Wait until hydration has fully settled so we never mutate DOM React is still matching.
+    const timer = window.setTimeout(() => {
       cleanup = setup();
-    });
+    }, 150);
 
     function setup() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -76,7 +75,7 @@ export function ScrollFx() {
     }
 
     return () => {
-      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
       cleanup?.();
     };
   }, [pathname]);
