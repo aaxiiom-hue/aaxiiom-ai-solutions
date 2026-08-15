@@ -101,7 +101,12 @@ export function ProblemCard({ problem }: { problem: BusinessProblem }) {
         </div>
       </div>
 
-      <div className="mt-5 rounded-2xl border border-border bg-surface p-4">
+      <div
+        className={cn(
+          "mt-5 rounded-2xl border border-border bg-surface p-4",
+          !showDetail && "hidden",
+        )}
+      >
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Example workflow
         </p>
