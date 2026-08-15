@@ -71,11 +71,13 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <CondensedToggle className="mt-3 w-full justify-center" />
             <Button asChild size="lg" className="my-3">
               <Link to="/tell-us-your-problem" onClick={() => setOpen(false)}>
                 Tell Us Your Problem
               </Link>
             </Button>
+
           </nav>
         </div>
       ) : null}
