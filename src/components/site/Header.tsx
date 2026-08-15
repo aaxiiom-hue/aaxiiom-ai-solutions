@@ -2,7 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
+import { CondensedToggle } from "@/components/site/CondensedToggle";
 import { Button } from "@/components/ui/button";
+
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -37,11 +39,13 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-2 lg:flex">
+          <CondensedToggle />
           <Button asChild>
             <Link to="/tell-us-your-problem">Tell Us Your Problem</Link>
           </Button>
         </div>
+
 
         <button
           type="button"
@@ -67,11 +71,13 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <CondensedToggle className="mt-3 w-full justify-center" />
             <Button asChild size="lg" className="my-3">
               <Link to="/tell-us-your-problem" onClick={() => setOpen(false)}>
                 Tell Us Your Problem
               </Link>
             </Button>
+
           </nav>
         </div>
       ) : null}

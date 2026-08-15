@@ -1,13 +1,24 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { getCategory, getSolution } from "@/data/catalogue";
 import type { BusinessProblem } from "@/data/types";
+import { useCondensed } from "@/hooks/use-condensed";
+import { cn } from "@/lib/utils";
 
 export function ProblemCard({ problem }: { problem: BusinessProblem }) {
   const category = getCategory(problem.category);
   const solution = getSolution(problem.category, problem.solutionSlug);
+  const { condensed } = useCondensed();
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (!condensed) setExpanded(false);
+  }, [condensed]);
+
+  const showDetail = !condensed || expanded;
 
   return (
     <article
@@ -17,7 +28,25 @@ export function ProblemCard({ problem }: { problem: BusinessProblem }) {
       <p className="text-xs font-semibold uppercase tracking-widest text-primary">{problem.area}</p>
       <h3 className="mt-2 text-xl font-bold sm:text-2xl">{problem.title}</h3>
 
-      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+      {condensed ? (
+        <>
+          <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{problem.problem}</p>
+          <button
+            type="button"
+            onClick={() => setExpanded((value) => !value)}
+            aria-expanded={expanded}
+            className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary"
+          >
+            {expanded ? "Show less" : "Show full detail"}
+            <ChevronDown
+              className={cn("h-3.5 w-3.5 transition-transform", expanded && "rotate-180")}
+            />
+          </button>
+        </>
+      ) : null}
+
+      <div className={cn("mt-5 grid gap-5 lg:grid-cols-2", !showDetail && "hidden")}>
+
         <div className="space-y-4">
           <div>
             <p className="text-sm font-semibold">The problem</p>
@@ -72,7 +101,12 @@ export function ProblemCard({ problem }: { problem: BusinessProblem }) {
         </div>
       </div>
 
-      <div className="mt-5 rounded-2xl border border-border bg-surface p-4">
+      <div
+        className={cn(
+          "mt-5 rounded-2xl border border-border bg-surface p-4",
+          !showDetail && "hidden",
+        )}
+      >
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Example workflow
         </p>
@@ -90,7 +124,7 @@ export function ProblemCard({ problem }: { problem: BusinessProblem }) {
         </ol>
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center gap-2">
+      <div className={cn("mt-5 flex flex-wrap items-center gap-2", !showDetail && "hidden")}>
         {problem.integrations.map((integration) => (
           <span
             key={integration}

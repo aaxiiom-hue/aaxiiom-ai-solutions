@@ -122,21 +122,23 @@
   }
 
   main {
-    perspective: 1400px;
-    perspective-origin: 50% 0%;
+    perspective: 1100px;
+    perspective-origin: 50% 30%;
+    transform-style: preserve-3d;
   }
 
   .reveal-3d {
     opacity: 0;
-    transform: translate3d(0, 46px, -90px) rotateX(7deg) scale(0.97);
+    transform: translate3d(0, 60px, -140px) rotateX(9deg) scale(0.965);
     transform-origin: 50% 0%;
     transition:
       opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+      transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
       filter 0.9s ease var(--reveal-delay, 0ms);
-    filter: blur(6px);
+    filter: blur(8px);
     will-change: transform, opacity;
   }
+
 
   .reveal-3d.is-revealed {
     opacity: 1;
@@ -146,7 +148,7 @@
 
   .reveal-3d .reveal-child {
     opacity: 0;
-    transform: translate3d(0, 26px, -40px) rotateX(5deg);
+    transform: translate3d(0, 34px, -70px) rotateX(6deg);
     transition:
       opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--stagger-delay, 0ms),
       transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--stagger-delay, 0ms);
@@ -157,19 +159,50 @@
     transform: none;
   }
 
+  /* Depth + parallax once revealed: driven by CSS vars from ScrollFx. */
+  .reveal-3d.is-revealed .reveal-child.depth-card {
+    transform: translate3d(0, var(--parallax-y, 0px), var(--parallax-z, 0px))
+      rotateX(var(--parallax-tilt, 0deg));
+    transform-style: preserve-3d;
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--stagger-delay, 0ms),
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .reveal-3d.is-revealed .reveal-child.depth-card:hover {
+    transform: translate3d(0, calc(var(--parallax-y, 0px) - 8px), 34px) rotateX(0deg) scale(1.012);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Section-level scroll snapping — gentle on desktop, magnetic on mobile. */
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-margin-top: 4rem;
+  }
+
+  @media (max-width: 767px) {
+    html {
+      scroll-snap-type: y proximity;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+      scroll-snap-type: none;
     }
 
     .reveal-3d,
-    .reveal-3d .reveal-child {
+    .reveal-3d .reveal-child,
+    .reveal-3d.is-revealed .reveal-child.depth-card {
       opacity: 1;
       transform: none;
       filter: none;
       transition: none;
     }
   }
+
 
   body {
     background-color: var(--color-background);
