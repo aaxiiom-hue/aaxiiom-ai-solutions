@@ -37,11 +37,13 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-2 lg:flex">
+          <CondensedToggle />
           <Button asChild>
             <Link to="/tell-us-your-problem">Tell Us Your Problem</Link>
           </Button>
         </div>
+
 
         <button
           type="button"

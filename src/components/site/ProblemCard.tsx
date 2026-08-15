@@ -124,7 +124,7 @@ export function ProblemCard({ problem }: { problem: BusinessProblem }) {
         </ol>
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center gap-2">
+      <div className={cn("mt-5 flex flex-wrap items-center gap-2", !showDetail && "hidden")}>
         {problem.integrations.map((integration) => (
           <span
             key={integration}
